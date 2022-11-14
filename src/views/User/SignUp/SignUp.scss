@@ -1,0 +1,79 @@
+.sign-up-container {
+
+    /* Set a style for all buttons */
+    button {
+        background-color: #04AA6D;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0px;
+        border: none;
+        cursor: pointer;
+        // max-width: 80%;
+        opacity: 0.9;
+    }
+
+    button:hover {
+        opacity: 1;
+    }
+
+    /* Extra styles for the cancel button */
+    .cancelSignUpbtn {
+        padding: 14px 20px;
+        background-color: #f44336;
+    }
+
+    /* Float cancel and signup buttons and add an equal width */
+    .cancelSignUpbtn,
+    .signupbtn {
+        float: left;
+        width: 50%;
+    }
+
+    /* Add padding to container elements */
+    .container {
+        padding: 16px;
+    }
+
+    /* Clear floats */
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+
+    .notice {
+        color: red;
+    }
+
+    .no-notice {
+        display: none;
+
+    }
+}
+
+
+.link-to-login{
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 400px) {
+    .sign-up-container {
+
+        .cancelSignUpbtn,
+        .signupbtn,
+        .emailInput,
+        .passwordInput,
+        .pswRepeat,
+        .addressInput,
+        .phonenumberInput,
+        .nameInput,
+        .genderInput,
+        .fullNameInput {
+            width: 100%;
+        }
+    }
+
+}

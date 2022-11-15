@@ -13,7 +13,21 @@ class HomePage extends Component {
   }
   componentDidMount() {}
   render() {
-    return <div>Content HTML</div>;
+    return (
+      <div className="homepage-container ">
+        <div className="section-header ">
+          <HomeHeader></HomeHeader>
+        </div>
+        <div className="slider">
+          <Slider />
+        </div>
+
+        <SectionBook></SectionBook>
+        <div className="mt-2">
+          <Footer />
+        </div>
+      </div>
+    );
   }
 }
 const mapStateToProps = (state) => {

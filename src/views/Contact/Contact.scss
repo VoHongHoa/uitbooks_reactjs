@@ -1,0 +1,71 @@
+.section-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+}
+
+.container-contact {
+
+    .title-contact {
+        display: block;
+        text-align: center;
+        width: 100%;
+        color: grey;
+    }
+
+    .content-contact {
+        .title-2 {
+            color: gray;
+            font-style: italic;
+            text-align: center;
+        }
+
+        .col {
+            margin: 40px 0;
+            columns: 3;
+
+            .col-1 {
+                margin: 0 auto;
+            }
+
+            .col-2 {
+                margin: 0 auto;
+            }
+
+            .col-3 {
+                margin: 0 auto;
+            }
+        }
+
+        h5 {
+            text-align: center;
+            font-weight: bold;
+            color: grey;
+            margin: 20px 0;
+        }
+
+        .second {
+            margin: 20px auto;
+            width: 75%;
+
+            .second-col {
+                display: flex;
+                column-rule: 2px solid rgb(235, 235, 235);
+
+                .tit {
+                    margin-left: 5%;
+                    width: 60%;
+                    text-align: left;
+                    color: grey;
+                }
+
+                .tit-2 {
+                    color: grey;
+                    // margin-left: 10%;
+                }
+            }
+        }
+    }
+
+}

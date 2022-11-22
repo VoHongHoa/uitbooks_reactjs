@@ -199,7 +199,115 @@ class UserManage extends Component {
       arr.push(i);
     }
     //console.log(arr);
-    return <div>Content HTML</div>;
+    return (
+      <div className="container">
+        <AdminHeader></AdminHeader>
+        <h2 className="title mt-3" style={{ textAlign: "center" }}>
+          Quản lý người dùng
+        </h2>
+        {this.props.userInfor &&
+          this.props.userInfor.role?.nameRole === "ADMIN" && (
+            <button
+              className="btn btn-primary"
+              onClick={() => this.handleOpenModal()}
+            >
+              <i className="fa-solid fa-plus"></i> Thêm mới
+            </button>
+          )}
+
+        <div className="col-12 mb-3 mt-3">
+          <label htmlFor="search">
+            <b>Tìm kiếm người dùng</b>
+          </label>
+          <input
+            type="text"
+            className="form-control mt-2"
+            placeholder="Tìm kiếm người dùng"
+            name="search"
+            onChange={(event) => this.handleOnchangeInput(event)}
+          />
+        </div>
+
+        <div className="container">
+          <table className="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Họ và Tên</th>
+                <th scope="col">Email</th>
+                <th scope="col">Role</th>
+                <th scope="col">Thao tác</th>
+              </tr>
+            </thead>
+            <tbody>
+              {allUser &&
+                allUser.length > 0 &&
+                allUser.map((item, index) => {
+                  return (
+                    <tr key={item.userId}>
+                      <th scope="row">{index + 1}</th>
+                      <td>{item.fullName}</td>
+                      <td>{item.email}</td>
+                      <td>{item.role?.nameRole ? item.role?.nameRole : ""}</td>
+                      <td className="">
+                        {this.props.userInfor &&
+                          this.props.userInfor.role?.nameRole === "ADMIN" && (
+                            <i
+                              className="fas fa-pencil"
+                              style={{ margin: "3px", cursor: "pointer" }}
+                              onClick={() => this.handleEditUser(item)}
+                            ></i>
+                          )}
+
+                        <i
+                          className="fas fa-trash "
+                          style={{ margin: "3px", cursor: "pointer" }}
+                          // onClick={() => this.handleDeleteUser(item.userId)}
+                          onClick={() => this.handleOpenPopup(item)}
+                        ></i>
+                      </td>
+                    </tr>
+                  );
+                })}
+            </tbody>
+          </table>
+
+          {this.state.action !== "SEARCH" && (
+            <div className="pagination">
+              <p>&laquo;</p>
+              {arr &&
+                arr.length &&
+                arr.map((item, index) => {
+                  return (
+                    <p
+                      onClick={() => this.handleChangePage(item)}
+                      className={currentPage === item ? "active" : ""}
+                      key={index}
+                    >
+                      {item}
+                    </p>
+                  );
+                })}
+              <p>&raquo;</p>
+            </div>
+          )}
+        </div>
+        <ModalAddNewUser
+          isOpenModal={this.state.isOpenModal}
+          toggle={this.toggle}
+          action={this.state.action}
+          doAddNewUser={this.doAddNewUser}
+          currentUserEdit={this.state.currentUserEdit}
+          doEditRoleUser={this.doEditRoleUser}
+        />
+        <Popup
+          isOpenPopup={this.state.isOpenPopup}
+          toggle={this.togglePopup}
+          handleDeleteUser={this.handleDeleteUser}
+          currentUserEdit={this.state.currentUserEdit}
+        />
+      </div>
+    );
   }
 }
 const mapStateToProps = (state) => {

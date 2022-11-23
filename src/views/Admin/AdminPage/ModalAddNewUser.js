@@ -179,7 +179,162 @@ class ModalAddNewBook extends Component {
   };
 
   render() {
-    return <div>Content HTML</div>;
+    return (
+      <Modal
+        isOpen={this.props.isOpenModal}
+        toggle={() => {
+          this.toggle();
+        }}
+        className={"modal-product-container"}
+        size="lg"
+      >
+        <ModalHeader
+          toggle={() => {
+            this.toggle();
+          }}
+        >
+          {this.state.action === "ADD_NEW_USER"
+            ? "Thêm mới người dùng"
+            : "Chỉnh sửa người dùng"}
+        </ModalHeader>
+        <ModalBody>
+          <div className="modalBody-product-container row">
+            <div className="col-6 emailInput">
+              <label htmlFor="email">
+                <b>Email</b>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Nhập email"
+                name="email"
+                onChange={(event) => this.handleOnchangeEmail(event)}
+                readOnly={this.state.action === "EDIT_USER" ? true : false}
+                value={this.state.email}
+              />
+              <span
+                className={
+                  this.state.errEmail === false ? "notice" : "no-notice"
+                }
+              >
+                Email phải có định dạng: *@gmail.com
+              </span>
+            </div>
+            <div className="col-6 fullNameInput">
+              <label htmlFor="fullName">
+                <b>Họ và tên</b>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Họ và tên"
+                name="fullName"
+                required
+                readOnly={this.state.action === "EDIT_USER" ? true : false}
+                onChange={(event) =>
+                  this.handleOnchangeInput(event, "fullName")
+                }
+                value={this.state.fullName}
+              />
+            </div>
+            <div className="col-6 nameInput mt-2">
+              <label htmlFor="username">
+                <b>Tên đăng nhập</b>
+              </label>
+              <input
+                type="text"
+                placeholder="Tên đăng nhập"
+                className="form-control"
+                name="username"
+                onChange={(event) =>
+                  this.handleOnchangeInput(event, "userName")
+                }
+                required
+                value={this.state.userName}
+                readOnly={this.state.action === "EDIT_USER" ? true : false}
+              />
+            </div>
+
+            <div className="col-6 passwordInput mt-2">
+              <label htmlFor="psw">
+                <b>Mật khẩu</b>
+              </label>
+              <input
+                type="password"
+                placeholder="Nhập mật khẩu"
+                className="form-control"
+                name="psw"
+                onChange={(event) => this.handleOnchangePassword(event)}
+                value={this.state.password}
+                readOnly={this.state.action === "EDIT_USER" ? true : false}
+              />
+              <span
+                className={
+                  this.state.passErr === false ? "notice" : "no-notice"
+                }
+              >
+                Mật khẩu có ít nhất 8 kí tự có chứa ít nhất: 1 kí tự in hoa, 1
+                kí tự thường, 1 kí tự đặc biệt!
+              </span>
+            </div>
+
+            <div className="col-6 phonenumberInput mt-2">
+              <label htmlFor="phonenumber">
+                <b>Số điện thoại</b>
+              </label>
+              <input
+                type="text"
+                placeholder="Nhập số điện thoại"
+                className="form-control"
+                name="phonenumber"
+                onChange={(event) => this.handleOnchangePhoneNumber(event)}
+                value={this.state.phoneNumber}
+                readOnly={this.state.action === "EDIT_USER" ? true : false}
+                required
+              />
+              <span
+                className={
+                  this.state.errPhone === false ? "notice" : "no-notice"
+                }
+              >
+                Số điện thoại không hợp lệ
+              </span>
+            </div>
+            <div className="col-6 genderInput mt-2">
+              <label htmlFor="gender">
+                <b>Vai trò</b>
+              </label>
+
+              <Select
+                type="text"
+                options={ROLE_OPTIONS}
+                onChange={this.handleOnchangeSelect}
+                name={"role"}
+                value={this.state.role}
+              />
+            </div>
+          </div>
+        </ModalBody>
+        <ModalFooter>
+          <Button
+            color="primary"
+            className="px-3"
+            onClick={() => this.handleSubmitAdd()}
+          >
+            {this.state.action === "ADD_NEW_USER" ? "Thêm" : "Lưu thay đổi"}
+          </Button>{" "}
+          <Button
+            color="secondary"
+            onClick={() => {
+              this.toggle();
+            }}
+            className="px-3"
+          >
+            Hủy
+          </Button>
+        </ModalFooter>
+      </Modal>
+    );
   }
 }
 

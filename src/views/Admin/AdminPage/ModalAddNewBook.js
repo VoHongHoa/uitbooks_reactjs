@@ -197,7 +197,167 @@ class ModalAddNewBook extends Component {
   render() {
     //console.log(this.state);
     let { allCategoriesBooks, action } = this.state;
-    return <div>Content HTML</div>;
+    return (
+      <Modal
+        isOpen={this.props.isOpenModal}
+        toggle={() => {
+          this.toggle();
+        }}
+        className={"modal-product-container"}
+        size="lg"
+      >
+        <ModalHeader
+          toggle={() => {
+            this.toggle();
+          }}
+        >
+          {action === "EDIT_BOOK" ? "Chỉnh sửa sách" : "Thêm mới sách"}
+        </ModalHeader>
+        <ModalBody>
+          <div className="modalBody-product-container row">
+            <div className="form-group mt-2 col-6">
+              <label>Tên sách</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Nhập tên sách"
+                onChange={(event) => {
+                  this.handleOnchangeInput(event, "nameBook");
+                }}
+                value={this.state.nameBook}
+              />
+            </div>
+            <div className="form-group mt-2 col-6">
+              <label>Tác giả</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Nhập tên tác giả"
+                onChange={(event) => {
+                  this.handleOnchangeInput(event, "author");
+                }}
+                value={this.state.author}
+              />
+            </div>
+            <div className="form-group mt-2 col-6">
+              <label>Mô tả</label>
+              <textarea
+                type="text"
+                className="form-control"
+                placeholder="Nhập mô tả"
+                onChange={(event) => {
+                  this.handleOnchangeInput(event, "description");
+                }}
+                value={this.state.description}
+              />
+            </div>
+
+            <div className="form-group mt-2 col-6">
+              <label>Giá</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Nhập giá"
+                onChange={(event) => {
+                  this.handleOnchangeInput(event, "price");
+                }}
+                value={this.state.price}
+              />
+            </div>
+            <div className="form-group mt-2 col-6">
+              <label>Năm xuất bản</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Nhập giá sách"
+                onChange={(event) => {
+                  this.handleOnchangeInput(event, "publishYear");
+                }}
+                value={this.state.publishYear}
+              />
+            </div>
+
+            <div className="form-group mt-2 col-6">
+              <label>Nhà xuất bản</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Năm xuất bản"
+                onChange={(event) => {
+                  this.handleOnchangeInput(event, "publishCom");
+                }}
+                value={this.state.publishCom}
+              />
+            </div>
+            <div className="form-group mt-2 col-6">
+              <label>Số lượng sách</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Nhập số lượng sách"
+                onChange={(event) => {
+                  this.handleOnchangeInput(event, "count");
+                }}
+                value={this.state.count}
+              />
+            </div>
+
+            <div className="form-group mt-2 col-6">
+              <label>Loại sách</label>
+              <Select
+                type="text"
+                options={allCategoriesBooks}
+                onChange={this.handleOnchangeSelect}
+                value={this.state.selectedCategory}
+                name={"selectedCategory"}
+              ></Select>
+            </div>
+            <div className="form-group mt-2 col-6">
+              <label>Hình ảnh</label>
+              <input
+                type="file"
+                className="form-control"
+                onChange={(event) => {
+                  this.handleOnchangeImage(event);
+                }}
+              />
+
+              <div
+                className="mt-2"
+                style={{
+                  backgroundImage: `url(${this.state.image})`,
+                  backgroundRepeat: "none",
+                  backgroundSize: "cover",
+                  width: "80px",
+                  height: "100px",
+                  backgroundPosition: "center",
+                  margin: "0 auto",
+                  border: " 1px solid black",
+                }}
+              ></div>
+            </div>
+          </div>
+        </ModalBody>
+        <ModalFooter>
+          <Button
+            color="primary"
+            className="px-3"
+            onClick={() => this.handleSubmitAdd()}
+          >
+            {action === "EDIT_BOOK" ? "Lưu thay đổi" : "Thêm mới"}
+          </Button>{" "}
+          <Button
+            color="secondary"
+            onClick={() => {
+              this.toggle();
+            }}
+            className="px-3"
+          >
+            Hủy
+          </Button>
+        </ModalFooter>
+      </Modal>
+    );
   }
 }
 

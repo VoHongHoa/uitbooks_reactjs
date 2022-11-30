@@ -14,7 +14,7 @@ class HomePage extends Component {
   componentDidMount() {}
   render() {
     return (
-      <div className="homepage-container ">
+      <div className="homepage-container container">
         <div className="section-header ">
           <HomeHeader></HomeHeader>
         </div>

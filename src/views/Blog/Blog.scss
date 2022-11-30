@@ -1,0 +1,33 @@
+.tittle-blog{
+    text-align: center;
+    margin: 30px;
+}
+.h5{
+    margin-left: 15%;
+    color: red;
+}
+.sidebar{
+    .navlink-home{
+        color: black;
+    }
+}
+.blog-card:hover{
+    border-color: rgb(1, 145, 32);
+    border-width: 2px;
+    background-color: rgb(210, 209, 209);
+    .card-tittle{
+        color: rgb(36, 3, 248);
+    }
+}
+.blog-card{
+    display: block;
+    border: solid 2px;
+    height: 100px;
+    border-color: rgb(196, 196, 196);
+    border-radius: 8px;
+    background: rgb(230, 230, 230);
+    max-width: 70%;
+    margin: 0 auto;
+    padding: 0 20px;
+    color: black;
+}

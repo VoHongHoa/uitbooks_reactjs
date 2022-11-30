@@ -47,7 +47,54 @@ class Blog extends Component {
   };
   render() {
     let { allBlog } = this.state;
-    return <div>Content HTML</div>;
+    return (
+      <div className="container">
+        <div className="section-header">
+          <HomeHeader></HomeHeader>
+        </div>
+        <section id="sidebar">
+          <p>
+            <NavLink to="/" style={{ color: "black", cursor: "pointer" }}>
+              Trang chủ
+            </NavLink>{" "}
+            | <b>Blog</b>
+          </p>
+          <h1 className="tittle-blog">Cập nhật tin tức</h1>
+          <h5 className="h5">Tin tức:</h5>
+          {allBlog &&
+            allBlog.length > 0 &&
+            allBlog.map((item, index) => {
+              return (
+                <div className="mt-2" key={index}>
+                  <div
+                    className="blog-card container"
+                    onClick={() => this.handleOpenModal(item)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <p className="card-tittle">{item.title}</p>
+                    <div className="row">
+                      <p className="card-user col-md-6">
+                        Người đăng:{" "}
+                        {item.user && item.user.fullName
+                          ? item.user.fullName
+                          : "Người dấu tên"}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+        </section>
+        <div className="mt-2">
+          <Footer />
+        </div>
+        <ModalDetailBlog
+          isOpenModal={this.state.isOpenModal}
+          toggle={this.toggle}
+          currentBlog={this.state.currentBlog}
+        />
+      </div>
+    );
   }
 }
 export default withRouter(Blog);

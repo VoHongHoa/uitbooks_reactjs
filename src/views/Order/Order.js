@@ -52,7 +52,111 @@ class Order extends Component {
   render() {
     let { allOrder, detailOrder } = this.state;
     console.log("check again: ", allOrder);
-    return <div>Content HTML</div>;
+    return (
+      <React.Fragment>
+        <div className="mb-2">
+          <HomeHeader />
+        </div>
+        <h2>Lịch sử mua hàng</h2>
+        {allOrder && allOrder.length > 0 ? (
+          allOrder.map((item, index) => {
+            return (
+              <div className="container order-card">
+                <div className="row">
+                  <p>
+                    ID đơn hàng: <b>{item.orderssId}</b>
+                  </p>
+                  <div className="col-sm-6">
+                    <p>
+                      Tên khách hàng: <span>{item.fullName}</span>{" "}
+                    </p>
+                    <p>
+                      Số điện thoại: <span>{item.telephone}</span>{" "}
+                    </p>
+                    <p>
+                      Địa chỉ: <span>{item.address}</span>{" "}
+                    </p>
+                  </div>
+                  <div className="col-sm-6">
+                    <p>
+                      Trị giá đơn hàng:{" "}
+                      <span style={{ fontWeight: "bold" }}>
+                        {item.totalPrice
+                          ? formatPrice(item.totalPrice)
+                          : item.totalPrice}
+                      </span>{" "}
+                    </p>
+                    <p>
+                      Trạng thái đơn hàng: <b>{item.status}</b>{" "}
+                    </p>
+                    <p>
+                      Ngày hóa đơn:
+                      <b> {moment(item.orderssDate).format("MM/DD/YYYY")}</b>
+                    </p>
+                  </div>
+                </div>
+                <h4 style={{ textAlign: "center" }}>Danh sách sản phẩm</h4>
+                <table className="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Tên sách</th>
+                      <th scope="col">Tác giả</th>
+                      <th scope="col">Hình ảnh</th>
+                      <th scope="col">Số lượng</th>
+                      <th scope="col">Giá</th>
+                      <th scope="col">Thành tiền</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {detailOrder &&
+                      detailOrder.length > 0 &&
+                      detailOrder[index]?.map((item, index) => {
+                        return (
+                          <tr key={item.orderssDeId}>
+                            <th scope="row">{index + 1}</th>
+                            <td>{item.book?.nameBook}</td>
+                            <td>{item.book?.author}</td>
+                            <td>
+                              <div
+                                className="img-product"
+                                style={{
+                                  backgroundImage: `url(${item.book?.image})`,
+                                  backgroundRepeat: "none",
+                                  backgroundSize: "cover",
+                                  width: "50px",
+                                  height: "60px",
+                                  backgroundPosition: "center",
+                                }}
+                              ></div>
+                            </td>
+                            <td>{item.count}</td>
+                            <td>
+                              {item.book && item.book?.price
+                                ? formatPrice(item.book?.price)
+                                : item.book?.price}
+                            </td>
+                            <td>
+                              {item.total
+                                ? formatPrice(item.total)
+                                : item.total}
+                            </td>
+                          </tr>
+                        );
+                      })}
+                  </tbody>
+                </table>
+              </div>
+            );
+          })
+        ) : (
+          <div>Không có đơn hàng nào</div>
+        )}
+        <div className="mt-2">
+          <Footer />
+        </div>
+      </React.Fragment>
+    );
   }
 }
 const mapStateToProps = (state) => {

@@ -1,0 +1,123 @@
+.card {
+    position: relative;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: .1875rem;
+}
+
+// .fade-in{
+//     -webkit-animation: 1s ease 0s normal forwards 1 fadein;
+//     animation: 1s ease 0s normal forwards 1 fadein;
+// }
+
+// @keyframes fadein{
+//     0% { opacity:0; }
+//     66% { opacity:0; }
+//     100% { opacity:1; }
+// }
+
+// @-webkit-keyframes fadein{
+//     0% { opacity:0; }
+//     66% { opacity:0; }
+//     100% { opacity:1; }
+// }
+
+
+.card-img-actions {
+    position: relative;
+    margin-bottom: 0;
+}
+
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 0 1.25rem;
+    text-align: center;
+
+    .name {
+        font-weight: 600;
+        font-size: large;
+        color: black;
+    }
+}
+
+.card-img {
+    width: 300px;
+    height: 370px
+}
+
+.star {
+    color: red
+}
+
+.bg-cart {
+    background-color: orange;
+    color: #fff
+}
+
+.bg-cart:hover {
+    color: #fff
+}
+
+.bg-buy {
+    background-color: green;
+    color: #fff;
+    padding-right: 29px
+}
+
+.bg-buy:hover {
+    color: #fff
+}
+
+a {
+    text-decoration: none !important
+}
+
+.price {
+    position: absolute;
+    bottom: 40px;
+    color: red;
+    font-weight: bold;
+    right: 32%;
+}
+
+.btn-add {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.card:hover {
+    .hide {
+        display: block;
+    }
+
+    .show {
+        display: none;
+    }
+}
+
+.btn:hover {
+    font-size: 105%;
+    font-weight: 500;
+}
+
+.pagination {
+    display: flex !important;
+    justify-content: center;
+}

@@ -235,7 +235,263 @@ class Cart extends Component {
     let { allItemInCart } = this.state;
     let { userInfor } = this.props;
     let total = 0;
-    return <div>Content HTML</div>;
+    return (
+      <div className="CartContainer">
+        <HomeHeader />
+        <section className="container" style={{ backgroundColor: "#d2c9ff" }}>
+          <div className="container py-5 h-100">
+            <div className="row d-flex justify-content-center align-items-center h-100">
+              <div className="col-12">
+                <div
+                  className="card card-registration card-registration-2"
+                  style={{ borderRadius: "15px" }}
+                >
+                  <div className="card-body p-0">
+                    <div className="row g-0">
+                      <div className="col-lg-8">
+                        <div className="p-5">
+                          <div className="d-flex justify-content-between align-items-center mb-5">
+                            <h1 className="fw-bold mb-0 text-black">
+                              Giỏ sách
+                            </h1>
+                            <h6 className="mb-0 text-muted">
+                              {allItemInCart.length} sách
+                            </h6>
+                          </div>
+                          {allItemInCart &&
+                            allItemInCart.length > 0 &&
+                            allItemInCart.map((item, index) => {
+                              total = total + item.price * item.quantity;
+                              return (
+                                <div
+                                  className="row mb-4 d-flex justify-content-between align-items-center cart"
+                                  key={index}
+                                >
+                                  <div className="col-md-2 col-lg-2 col-xl-2">
+                                    <img
+                                      src={item.image}
+                                      className="img-fluid rounded-3"
+                                      alt="Cotton T-shirt"
+                                    />
+                                  </div>
+                                  <div className="col-md-3 col-lg-3 col-xl-3">
+                                    <h6 className="text-muted">Sách</h6>
+                                    <h6 className="text-black mb-0">
+                                      {item.nameBook}
+                                    </h6>
+                                  </div>
+                                  <div className="col-md-3 col-lg-3 col-xl-2 d-flex">
+                                    <button
+                                      className="btn btn-link px-2"
+                                      onClick={() =>
+                                        this.handleDecreaseQuantity(item)
+                                      }
+                                    >
+                                      <i className="fas fa-minus"></i>
+                                    </button>
+
+                                    <input
+                                      id="form1"
+                                      name="quantity"
+                                      value={item.quantity}
+                                      type="number"
+                                      className="form-control form-control-sm"
+                                      onChange={(event) =>
+                                        this.handleOnchangeInput(event, item)
+                                      }
+                                    />
+
+                                    <button
+                                      className="btn btn-link px-2"
+                                      onClick={() =>
+                                        this.handleIncreaseQuantity(item)
+                                      }
+                                    >
+                                      <i className="fas fa-plus"></i>
+                                    </button>
+                                  </div>
+                                  <div className="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                    <h6 className="mb-0">
+                                      {formatPrice(item.price)}
+                                    </h6>
+                                  </div>
+                                  <div className="col-md-1 col-lg-1 col-xl-1 text-end">
+                                    <a href="#!" className="text-muted">
+                                      <i
+                                        className="fas fa-times"
+                                        onClick={() =>
+                                          this.handleDeleteBook(item)
+                                        }
+                                      ></i>
+                                    </a>
+                                  </div>
+                                </div>
+                              );
+                            })}
+
+                          <div className="pt-5">
+                            <h6 className="mb-0">
+                              <Link to="/" className="text-body">
+                                <i className="fas fa-long-arrow-alt-left me-2"></i>
+                                Tiếp tục mua sách
+                              </Link>
+                            </h6>
+                          </div>
+                        </div>
+                      </div>
+                      {allItemInCart && allItemInCart.length > 0 && (
+                        <div className="col-lg-4 bg-grey">
+                          <div className="p-5">
+                            <h3 className="fw-bold mb-2 pt-1">Hóa đơn</h3>
+                            <hr className="my-4" />
+
+                            <div className="d-flex justify-content-between mb-2">
+                              <h5 className="text-uppercase">
+                                {allItemInCart.length} sách
+                              </h5>
+                            </div>
+
+                            <div className="mb-2 pb-2">
+                              <label
+                                className="form-label"
+                                htmlFor="form3Examplea2"
+                              >
+                                Họ và tên
+                              </label>
+                              <input
+                                type="text"
+                                id="form3Examplea2"
+                                placeholder="Nhập họ và tên"
+                                className="form-control"
+                                value={this.state.fullName}
+                                onChange={(event) =>
+                                  this.handleOnchangeInput(event, "fullName")
+                                }
+                              />
+                            </div>
+
+                            <div className="mb-2 pb-2">
+                              <label
+                                className="form-label"
+                                htmlFor="form3Examplea2"
+                              >
+                                Email
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Nhập email"
+                                name="email"
+                                onChange={(event) =>
+                                  this.handleOnchangeEmail(event)
+                                }
+                                value={this.state.email}
+                              />
+                              <span
+                                className={
+                                  this.state.errEmail === false
+                                    ? "notice"
+                                    : "no-notice"
+                                }
+                              >
+                                Email phải có định dạng: *@gmail.com
+                              </span>
+                            </div>
+
+                            {/* <h5 className="text-uppercase mb-3">Give code</h5> */}
+
+                            <div className="mb-2">
+                              <div className="form-outline">
+                                <label
+                                  className="form-label"
+                                  htmlFor="form3Examplea2"
+                                >
+                                  Địa chỉ
+                                </label>
+                                <textarea
+                                  type="text"
+                                  id="form3Examplea2"
+                                  placeholder="Nhập địa chỉ"
+                                  className="form-control"
+                                  value={this.state.address}
+                                  onChange={(event) =>
+                                    this.handleOnchangeInput(event, "address")
+                                  }
+                                />
+                              </div>
+                            </div>
+
+                            <div className="mb-2">
+                              <div className="form-outline">
+                                <label
+                                  className="form-label"
+                                  htmlFor="phonenumber"
+                                >
+                                  Số điện thoại
+                                </label>
+                                <input
+                                  type="text"
+                                  placeholder="Nhập số điện thoại"
+                                  className="form-control"
+                                  name="phonenumber"
+                                  onChange={(event) =>
+                                    this.handleOnchangePhoneNumber(event)
+                                  }
+                                  value={this.state.phoneNumber}
+                                  readOnly={
+                                    this.state.action === "EDIT_USER"
+                                      ? true
+                                      : false
+                                  }
+                                  required
+                                />
+                                <span
+                                  className={
+                                    this.state.errPhone === false
+                                      ? "notice"
+                                      : "no-notice"
+                                  }
+                                >
+                                  Số điện thoại không hợp lệ
+                                </span>
+                              </div>
+                            </div>
+
+                            <hr className="my-4" />
+
+                            <div className="d-flex justify-content-between mb-5">
+                              <h5 className="text">Trị giá hóa đơn</h5>
+                              <h5>{formatPrice(total)}</h5>
+                            </div>
+
+                            <button
+                              type="button"
+                              className="btn btn-primary btn-block btn-lg btn-pay"
+                              data-mdb-ripple-color="dark"
+                              onClick={() => this.handleBuyBooks()}
+                            >
+                              Thanh toán khi nhận sách
+                            </button>
+                            <p className="mt-2">Hoặc</p>
+                            <PayPalCheckoutButton
+                              total={total}
+                              handleBuyBooks={this.handleBuyBooks}
+                              checkInput={this.checkInput}
+                              changePayment={this.changePayment}
+                            />
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <Footer />
+      </div>
+    );
   }
 }
 const mapStateToProps = (state) => {

@@ -168,7 +168,79 @@ class BlogManage extends Component {
   };
   render() {
     let { allSelectBlog, currentBlog } = this.state;
-    return <div>Blog</div>;
+    return (
+      <div className="container">
+        <AdminHeader></AdminHeader>
+        <h2 className="title mt-3">Quản lý các Blog</h2>
+        <div className="row">
+          <div className="col-3">
+            <div className="form-group">
+              <label>Chọn blog</label>
+              <Select
+                type="text"
+                options={allSelectBlog}
+                onChange={this.handleOnchangeSelect}
+                value={this.state.selectedBlog}
+                name={"selectedBlog"}
+              ></Select>
+            </div>
+          </div>
+          <div className="col-9">
+            <div className="form-group mb-2">
+              <label>Tiêu đề</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Tiêu đề Blog"
+                onChange={(event) => {
+                  this.handleOnchangeInput(event, "title");
+                }}
+                value={this.state.title}
+              />
+            </div>
+            <MdEditor
+              style={{ height: "500px" }}
+              renderHTML={(text) => mdParser.render(text)}
+              onChange={this.handleEditorChange}
+              value={this.state.contentMarkdown}
+            />
+            <div
+              className="action mt-2"
+              style={{
+                display: "flex",
+                // justifyContent: "space-between",
+                gap: "20px",
+              }}
+            >
+              <button
+                className="btn btn-primary mt-2"
+                onClick={() => this.handleAddNewBlog()}
+              >
+                {this.state.action === "ADD_BLOG"
+                  ? "Thêm Blog"
+                  : "Lưu thay đổi"}
+              </button>
+              {this.state.action === "EDIT_BLOG" && (
+                <button
+                  className="btn btn-danger mt-2"
+                  onClick={() => this.handleDeleteBlog()}
+                >
+                  Xóa
+                </button>
+              )}
+              {this.state.action === "EDIT_BLOG" && (
+                <button
+                  className="btn btn-dark mt-2"
+                  onClick={() => this.handleCancel()}
+                >
+                  Hủy
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 }
 const mapStateToProps = (state) => {

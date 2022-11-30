@@ -165,7 +165,109 @@ class CategoriesBooks extends Component {
     for (let i = 0; i < numOfPage; i++) {
       arr.push(i);
     }
-    return <div>categoriesBooks</div>;
+    return (
+      <div className="categories-manage-container container">
+        <AdminHeader></AdminHeader>
+        <h2 className="title mt-3">Quản lý loại sách</h2>
+        {this.props.userInfor &&
+          this.props.userInfor.role.nameRole === "ADMIN" && (
+            <div className="form-groud mt-3 mb-3">
+              <label>Thêm mới loại sách</label>
+              <input
+                className="form-control"
+                type={"text"}
+                value={this.state.newCategories}
+                onChange={(event) => this.handleOnchangeInput(event)}
+              />
+              {this.state.action === "EDIT_CATEGORY" ? (
+                <div style={{ display: "flex", gap: "5px" }}>
+                  <button
+                    className="btn btn-primary mt-2"
+                    onClick={() => this.handleEditCategoriesBook()}
+                  >
+                    Lưu
+                  </button>
+                  <button
+                    className="btn btn-danger mt-2"
+                    onClick={() => this.handleCancelEdit()}
+                  >
+                    Hủy
+                  </button>
+                </div>
+              ) : (
+                <button
+                  className="btn btn-primary mt-2"
+                  onClick={() => this.handleAddNewCategoriesBook()}
+                >
+                  <i className="fa-solid fa-plus"></i> Thêm mới
+                </button>
+              )}
+            </div>
+          )}
+
+        <div className="container">
+          <table className="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Loại sách và Tên</th>
+                {this.props.userInfor &&
+                  this.props.userInfor.role.nameRole === "ADMIN" && (
+                    <th scope="col">Thao tác</th>
+                  )}
+              </tr>
+            </thead>
+            <tbody>
+              {allCategories &&
+                allCategories.length > 0 &&
+                allCategories.map((item, index) => {
+                  return (
+                    <tr key={item.categoryId}>
+                      <th scope="row">{index + 1}</th>
+                      <td>{item.nameCate}</td>
+                      {this.props.userInfor &&
+                        this.props.userInfor.role.nameRole === "ADMIN" && (
+                          <td>
+                            <i
+                              className="fas fa-pencil"
+                              style={{ margin: "3px", cursor: "pointer" }}
+                              onClick={() => this.handleChooseCate(item)}
+                            ></i>
+                            <i
+                              className="fas fa-trash"
+                              style={{ margin: "3px", cursor: "pointer" }}
+                              onClick={() =>
+                                this.handleDeleteCategories(item.categoryId)
+                              }
+                            ></i>
+                          </td>
+                        )}
+                    </tr>
+                  );
+                })}
+            </tbody>
+          </table>
+
+          <div className="pagination">
+            <p>&laquo;</p>
+            {arr &&
+              arr.length &&
+              arr.map((item, index) => {
+                return (
+                  <p
+                    onClick={() => this.handleChangePage(item)}
+                    className={currentPage === item ? "active" : ""}
+                    key={index}
+                  >
+                    {item}
+                  </p>
+                );
+              })}
+            <p>&raquo;</p>
+          </div>
+        </div>
+      </div>
+    );
   }
 }
 const mapStateToProps = (state) => {

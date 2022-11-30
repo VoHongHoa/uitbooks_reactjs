@@ -190,7 +190,104 @@ class OrderManage extends Component {
     for (let i = 0; i < numOfPage; i++) {
       arr.push(i);
     }
-    return <div>Order</div>;
+    return (
+      <div className="container">
+        <AdminHeader></AdminHeader>
+        <h2 className="title mt-3 mb-3">Quản lý đơn hàng</h2>
+        <div className="col-12 mb-3">
+          <label htmlFor="search">
+            <b>Tìm kiếm hóa đơn</b>
+          </label>
+          <input
+            type="text"
+            className="form-control mt-2"
+            placeholder="Tìm kiếm hóa đơn"
+            name="search"
+            onChange={(event) => this.handleOnchangeInput(event)}
+          />
+        </div>
+
+        <div className="container">
+          <table className="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Khách hàng</th>
+                <th scope="col">Địa chỉ giao hàng</th>
+                <th scope="col">Số điện thoại</th>
+                <th scope="col">Tống số sách</th>
+                <th scope="col">Ngày hóa đơn</th>
+                <th scope="col">Trạng thái</th>
+                <th scope="col">Trạng thái thanh toán</th>
+                <th scope="col">Hành động</th>
+              </tr>
+            </thead>
+            <tbody>
+              {allOrder &&
+                allOrder.length > 0 &&
+                allOrder.map((item, index) => {
+                  return (
+                    <tr key={item.orderssId}>
+                      <th scope="row">{index + 1}</th>
+                      <td>{item.fullName}</td>
+                      <td>{item.address}</td>
+                      <td>{item.telephone}</td>
+                      <td>{item.totalBook}</td>
+                      <td>{moment(item.orderssDate).format("MM/DD/YYYY")}</td>
+                      <td>{item.status}</td>
+                      <td>{item.pay}</td>
+                      <td className="">
+                        <i
+                          className="fa-solid fa-eye"
+                          style={{ margin: "3px", cursor: "pointer" }}
+                          onClick={() => this.handleViewDetailOrder(item)}
+                        ></i>
+                        <i
+                          className="fas fa-pencil"
+                          style={{ margin: "3px", cursor: "pointer" }}
+                          onClick={() => this.handleEditUser(item)}
+                        ></i>
+                        <i
+                          className="fas fa-trash"
+                          style={{ margin: "3px", cursor: "pointer" }}
+                          onClick={() => this.handleDeleteOrder(item.orderssId)}
+                        ></i>
+                      </td>
+                    </tr>
+                  );
+                })}
+            </tbody>
+          </table>
+
+          {this.state.action !== "SEARCH" && (
+            <div className="pagination">
+              <p>&laquo;</p>
+              {arr &&
+                arr.length &&
+                arr.map((item, index) => {
+                  return (
+                    <p
+                      onClick={() => this.handleChangePage(item)}
+                      className={currentPage === item ? "active" : ""}
+                      key={index}
+                    >
+                      {item}
+                    </p>
+                  );
+                })}
+              <p>&raquo;</p>
+            </div>
+          )}
+        </div>
+        <ModalViewDetailOrder
+          toggle={this.toggleCloseModalViewDetail}
+          isOpenModalView={this.state.isOpenModalView}
+          detailOrder={detailOrder}
+          curentOrder={curentOrder}
+          doUpdateStatusOrder={this.doUpdateStatusOrder}
+        />
+      </div>
+    );
   }
 }
 const mapStateToProps = (state) => {

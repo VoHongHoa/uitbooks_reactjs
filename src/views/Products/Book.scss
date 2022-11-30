@@ -1,0 +1,35 @@
+.product-container {
+    .section-header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+
+    }
+
+    .filter {
+        .all-availble-price {
+            .title-select {
+                font-size: 20px;
+            }
+
+
+            .select-price {
+                border: none;
+                width: 100%;
+                border-bottom: 3px solid #2196f3;
+                outline: none;
+
+            }
+        }
+    }
+
+    @media screen and (max-width: 400px) {
+        .filter-container {
+            width: 100%;
+
+            .filter {
+                margin-left: 0;
+            }
+        }
+    }
+}

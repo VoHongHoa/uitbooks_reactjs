@@ -147,7 +147,87 @@ class AdminPage extends Component {
         },
       ],
     };
-    return <div>admin page</div>;
+    return (
+      <div>
+        <div className="container">
+          <AdminHeader />
+          <h2 className="title mt-3" style={{ textAlign: "center" }}>
+            Báo cáo thống kê
+          </h2>
+          <div className="row">
+            <div className="col-6 mb-3">
+              <Bar
+                data={dataUser}
+                options={{
+                  title: {
+                    display: true,
+                    text: "Average Rainfall per month",
+                    fontSize: 20,
+                  },
+                  legend: {
+                    display: true,
+                    position: "right",
+                  },
+                }}
+              />
+              <p style={{ textAlign: "center" }}>Biểu đồ người dùng</p>
+            </div>
+            <div className="col-6">
+              <Bar
+                data={dataSale}
+                options={{
+                  title: {
+                    display: true,
+                    text: "Average Rainfall per month",
+                    fontSize: 20,
+                  },
+                  legend: {
+                    display: true,
+                    position: "right",
+                  },
+                }}
+              />
+              <p style={{ textAlign: "center" }}>Biểu đồ doanh thu</p>
+            </div>
+            <div className="col-6">
+              <Bar
+                data={dataBook}
+                options={{
+                  title: {
+                    display: true,
+                    text: "Average Rainfall per month",
+                    fontSize: 20,
+                  },
+                  legend: {
+                    display: true,
+                    position: "right",
+                  },
+                }}
+              />
+              <p style={{ textAlign: "center" }}>Biểu đồ sách</p>
+            </div>
+
+            <div className="col-6">
+              <Bar
+                data={dataCategory}
+                options={{
+                  title: {
+                    display: true,
+                    text: "Average Rainfall per month",
+                    fontSize: 20,
+                  },
+                  legend: {
+                    display: true,
+                    position: "right",
+                  },
+                }}
+              />
+              <p style={{ textAlign: "center" }}>Biểu đồ loại sách</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 }
 

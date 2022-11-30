@@ -18,8 +18,45 @@ class AdminHeader extends Component {
   };
   render() {
     let { isReponsesive } = this.state;
-    // console.log;
-    return <div>admin header</div>;
+    return (
+      <div
+        className={isReponsesive === false ? "topnav" : "topnav responsive "}
+        id="myTopnav"
+      >
+        <NavLink to={"/"} exact={true} activeClassName="active">
+          Trang bán hàng
+        </NavLink>
+        {this.props.userInfor &&
+          this.props.userInfor.role.nameRole === "ADMIN" && (
+            <NavLink to={"/admin"} exact={true} activeClassName="active">
+              Thống kê
+            </NavLink>
+          )}
+        <NavLink to={"/admin/user"} exact={true} activeClassName="active">
+          Người dùng
+        </NavLink>
+        <NavLink to={"/admin/categories"} exact={true} activeClassName="active">
+          Loại sách
+        </NavLink>
+        <NavLink to={"/admin/books"} exact={true} activeClassName="active">
+          Sách
+        </NavLink>
+        <NavLink to={"/admin/order"} exact={true} activeClassName="active">
+          Đơn hàng
+        </NavLink>
+
+        {this.props.userInfor &&
+          this.props.userInfor.role.nameRole === "ADMIN" && (
+            <NavLink to={"/admin/blog"} exact={true} activeClassName="active">
+              Blog
+            </NavLink>
+          )}
+
+        <a className="icon" onClick={() => this.myFuntion()} href="#">
+          <i className="fa fa-bars"></i>
+        </a>
+      </div>
+    );
   }
 }
 const mapStateToProps = (state) => {

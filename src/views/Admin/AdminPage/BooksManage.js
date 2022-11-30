@@ -182,7 +182,115 @@ class BooksManage extends Component {
       arr.push(i);
     }
     //console.log(this.state);
-    return <div>Books</div>;
+    return (
+      <div className="categories-manage-container container">
+        <AdminHeader></AdminHeader>
+        <h2 className="title mt-3">
+          {this.props.userInfor &&
+          this.props.userInfor.role.nameRole === "ADMIN"
+            ? "Quản lý sách"
+            : "Xem thông tin sách"}
+        </h2>
+        {this.props.userInfor &&
+          this.props.userInfor.role.nameRole === "ADMIN" && (
+            <button
+              className="btn btn-primary mt-2"
+              onClick={() => this.handleAddNewBook()}
+            >
+              <i className="fa-solid fa-plus"></i> Thêm mới
+            </button>
+          )}
+
+        <div className="col-12 mb-3 mt-3">
+          <label htmlFor="search">
+            <b>Tìm kiếm sách</b>
+          </label>
+          <input
+            type="text"
+            className="form-control mt-2"
+            placeholder="Tìm kiếm sách"
+            name="search"
+            onChange={(event) => this.handleOnchangeInput(event)}
+          />
+        </div>
+
+        <div className="container">
+          <table className="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tên sách</th>
+                <th scope="col">Tác giả</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Giá</th>
+                {this.props.userInfor &&
+                  this.props.userInfor.role.nameRole === "ADMIN" && (
+                    <th scope="col">Thao tác</th>
+                  )}
+              </tr>
+            </thead>
+            <tbody>
+              {allBooks &&
+                allBooks.length > 0 &&
+                allBooks.map((item, index) => {
+                  return (
+                    <tr key={item.bookId}>
+                      <th scope="row">{index + 1}</th>
+                      <td>{item.nameBook}</td>
+                      <td>{item.author}</td>
+                      <td>{item.count}</td>
+                      <td>{formatPrice(item.price)}</td>
+                      {this.props.userInfor &&
+                        this.props.userInfor.role.nameRole === "ADMIN" && (
+                          <td>
+                            <i
+                              className="fas fa-pencil"
+                              style={{ margin: "3px", cursor: "pointer" }}
+                              onClick={() => this.handleEditBook(item)}
+                            ></i>
+                            <i
+                              className="fas fa-trash "
+                              style={{ margin: "3px", cursor: "pointer" }}
+                              onClick={() => this.handleDeleteBook(item.bookId)}
+                            ></i>
+                          </td>
+                        )}
+                    </tr>
+                  );
+                })}
+            </tbody>
+          </table>
+
+          {this.state.action !== "SEARCH" && this.state.action !== "EDIT_BOOK" && (
+            <div className="pagination">
+              <p>&laquo;</p>
+              {arr &&
+                arr.length &&
+                arr.map((item, index) => {
+                  return (
+                    <p
+                      onClick={() => this.handleChangePage(item)}
+                      className={currentPage === item ? "active" : ""}
+                      key={index}
+                    >
+                      {item}
+                    </p>
+                  );
+                })}
+              <p>&raquo;</p>
+            </div>
+          )}
+        </div>
+        <ModalAddNewBook
+          isOpenModal={this.state.isOpenModal}
+          toggle={this.toggle}
+          doAddNewBook={this.doAddNewBook}
+          action={this.state.action}
+          currentBook={this.state.currentBook}
+          doEditBook={this.doEditBook}
+        />
+      </div>
+    );
   }
 }
 const mapStateToProps = (state) => {

@@ -1,0 +1,31 @@
+.column{
+    text-align: center;
+    color: rgb(99, 99, 99);
+    padding: 20px 0;
+}
+.column:hover{
+    color: rgb(39, 39, 39);
+}
+.terms{
+    color: rgb(99, 99, 99);
+}
+.content{
+    display:block;
+    padding: 40px 20px 20px 20px;
+    background-color: rgb(235, 235, 235);
+    border-radius:0 0 20px 20px;
+    margin-bottom: 20px;
+}
+.head{
+    margin: 10px 0px 0px 0px;
+    margin-top: 20px;
+    font-size:1.5em;
+    font-weight: 600;
+    
+    .active{
+        border-radius: 20px 20px 0 0;
+        background-color: rgb(235, 235, 235);
+        font-weight: 650;
+        border-bottom: solid black 1px;
+    }
+}

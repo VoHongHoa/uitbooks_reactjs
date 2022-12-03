@@ -5,7 +5,7 @@ import { formatPrice } from "../../constants/format";
 import {
   fetchDataFilter,
   getBookFilter,
-  getCateBook
+  getCateBook,
 } from "../../services/BookService";
 import { addToCart } from "../../store/actions/AppAction";
 import Footer from "../Homepage/Footer";
@@ -52,7 +52,7 @@ class Book extends Component {
           numOfPage =
             (res.count -
               (res.count % process.env.REACT_APP_PAGING_LIMIT_PRODUCT)) /
-            process.env.REACT_APP_PAGING_LIMIT_PRODUCT +
+              process.env.REACT_APP_PAGING_LIMIT_PRODUCT +
             1;
         }
         this.setState({
@@ -75,7 +75,7 @@ class Book extends Component {
         numOfPage =
           (res.count -
             (res.count % process.env.REACT_APP_PAGING_LIMIT_PRODUCT)) /
-          process.env.REACT_APP_PAGING_LIMIT_PRODUCT +
+            process.env.REACT_APP_PAGING_LIMIT_PRODUCT +
           1;
       }
       this.setState({
@@ -238,31 +238,32 @@ class Book extends Component {
     }
     //console.log(this.state);
     let cateName = this.state.allBooks[0]?.category.nameCate;
-    return <div className="product-container">
-      <div className="section-header">
-        <HomeHeader></HomeHeader>
-      </div>
-      <div id="sidebar">
-        <p cla>
-          <span
-            onClick={() => this.handleReturnHome()}
-            style={{ cursor: "pointer" }}
-          >
-            Trang chủ
-          </span>{" "}
-          | <b>{cateName}</b>
-        </p>
-      </div>
-      <div className="row">
-        <div className="filter-container col-2 mt-3">
-          <p style={{ textAlign: "center", fontSize: "20px" }}>
-            Lọc sản phẩm
+    return (
+      <div className="product-container">
+        <div className="section-header">
+          <HomeHeader></HomeHeader>
+        </div>
+        <div id="sidebar">
+          <p cla>
+            <span
+              onClick={() => this.handleReturnHome()}
+              style={{ cursor: "pointer" }}
+            >
+              Trang chủ
+            </span>{" "}
+            | <b>{cateName}</b>
           </p>
+        </div>
+        <div className="row">
+          <div className="filter-container col-2 mt-3">
+            <p style={{ textAlign: "center", fontSize: "20px" }}>
+              Lọc sản phẩm
+            </p>
 
-          <div className="filter">
-            <div className="all-availble-price mb-2">
-              <div className="title-select">Giá: </div>
-              {/* <select
+            <div className="filter">
+              <div className="all-availble-price mb-2">
+                <div className="title-select">Giá: </div>
+                {/* <select
               className="select-price mt-2"
               // onChange={(event) =>
               //   this.handleOnchangeSelect(event, "selectedPrice")
@@ -272,74 +273,74 @@ class Book extends Component {
               <option>giá</option>
               <option>giá</option>
             </select> */}
-              <div
-                className="soft mt-2"
-                style={{ display: "flex", justifyContent: "space-between" }}
-              >
-                <button
-                  className={
-                    this.state.filterIns === true
-                      ? "btn btn-primary"
-                      : "btn btn-dark"
-                  }
-                  onClick={() => this.handlefilterPriceIns()}
+                <div
+                  className="soft mt-2"
+                  style={{ display: "flex", justifyContent: "space-between" }}
                 >
-                  <i className="fa-solid fa-arrow-up-short-wide"></i> tăng
-                </button>
-                <button
-                  className={
-                    this.state.filterIns === false
-                      ? "btn btn-primary"
-                      : "btn btn-dark"
-                  }
-                  onClick={() => this.handlefilterPriceDsc()}
-                >
-                  <i className="fa-solid fa-arrow-down-short-wide"></i>
-                  giảm
-                </button>
+                  <button
+                    className={
+                      this.state.filterIns === true
+                        ? "btn btn-primary"
+                        : "btn btn-dark"
+                    }
+                    onClick={() => this.handlefilterPriceIns()}
+                  >
+                    <i className="fa-solid fa-arrow-up-short-wide"></i> tăng
+                  </button>
+                  <button
+                    className={
+                      this.state.filterIns === false
+                        ? "btn btn-primary"
+                        : "btn btn-dark"
+                    }
+                    onClick={() => this.handlefilterPriceDsc()}
+                  >
+                    <i className="fa-solid fa-arrow-down-short-wide"></i>
+                    giảm
+                  </button>
+                </div>
               </div>
-            </div>
-            <hr className="my-4" />
-            <div className="all-availble-price mb-2">
-              <div className="title-select">Tác giả: </div>
-              <select
-                className="select-price mt-2"
-                onChange={(event) => this.handleOnchangeSelectAuthor(event)}
-              >
-                {allAuthor &&
-                  allAuthor.length > 0 &&
-                  allAuthor.map((item, index) => {
-                    return (
-                      <option value={item.value} key={index}>
-                        {item.label}
-                      </option>
-                    );
-                  })}
-              </select>
-            </div>
-            <hr className="my-4" />
+              <hr className="my-4" />
+              <div className="all-availble-price mb-2">
+                <div className="title-select">Tác giả: </div>
+                <select
+                  className="select-price mt-2"
+                  onChange={(event) => this.handleOnchangeSelectAuthor(event)}
+                >
+                  {allAuthor &&
+                    allAuthor.length > 0 &&
+                    allAuthor.map((item, index) => {
+                      return (
+                        <option value={item.value} key={index}>
+                          {item.label}
+                        </option>
+                      );
+                    })}
+                </select>
+              </div>
+              <hr className="my-4" />
 
-            <div className="all-availble-price mb-2">
-              <div className="title-select">Năm xuất bản: </div>
-              <select
-                className="select-price mt-2"
-                onChange={(event) =>
-                  this.handleOnchangeSelectYearchPublish(event)
-                }
-              >
-                {allPublish &&
-                  allPublish.length > 0 &&
-                  allPublish.map((item, index) => {
-                    return (
-                      <option value={item.value} key={index + 200}>
-                        {item.label}
-                      </option>
-                    );
-                  })}
-              </select>
-            </div>
-            <hr className="my-4" />
-            {/* <div className="soft" style={{ display: "flex" }}>
+              <div className="all-availble-price mb-2">
+                <div className="title-select">Năm xuất bản: </div>
+                <select
+                  className="select-price mt-2"
+                  onChange={(event) =>
+                    this.handleOnchangeSelectYearchPublish(event)
+                  }
+                >
+                  {allPublish &&
+                    allPublish.length > 0 &&
+                    allPublish.map((item, index) => {
+                      return (
+                        <option value={item.value} key={index + 200}>
+                          {item.label}
+                        </option>
+                      );
+                    })}
+                </select>
+              </div>
+              <hr className="my-4" />
+              {/* <div className="soft" style={{ display: "flex" }}>
             <button
               className={
                 this.state.filterIns === true
@@ -361,146 +362,147 @@ class Book extends Component {
               <i className="fa-solid fa-arrow-down-short-wide"></i> Giá giảm
             </button>
           </div> */}
+            </div>
           </div>
-        </div>
-        <div className="container d-flex justify-content-center mt-3 mb-3 col-9">
-          <div className="row">
-            {allBooks &&
-              allBooks.length > 0 &&
-              allBooks.map((item, index) => {
-                return (
-                  <div
-                    className={
-                      allBooks.length >= 3
-                        ? "col-md-4 mt-2"
-                        : "col-md-auto mt-2"
-                    }
-                    key={index}
-                  >
-                    <div className="fade-in">
-                      <div
-                        className="card"
-                        style={
-                          this.checkScreen()
-                            ? { height: "500px" }
-                            : { height: "550px" }
-                        }
-                      >
-                        <div onClick={() => this.handleDetailBook(item)}>
-                          <div className="card-body">
-                            <div className="card-img-actions">
-                              <img
-                                src={item.image}
-                                className="card-img img-fluid"
-                                width="96"
-                                height="200"
-                                alt="item.nameBook"
-                              />
+          <div className="container d-flex justify-content-center mt-3 mb-3 col-9">
+            <div className="row">
+              {allBooks &&
+                allBooks.length > 0 &&
+                allBooks.map((item, index) => {
+                  return (
+                    <div
+                      className={
+                        allBooks.length >= 3
+                          ? "col-md-4 mt-2"
+                          : "col-md-auto mt-2"
+                      }
+                      key={index}
+                    >
+                      <div className="fade-in">
+                        <div
+                          className="card"
+                          style={
+                            this.checkScreen()
+                              ? { height: "500px" }
+                              : { height: "550px" }
+                          }
+                        >
+                          <div onClick={() => this.handleDetailBook(item)}>
+                            <div className="card-body">
+                              <div className="card-img-actions">
+                                <img
+                                  src={item.image}
+                                  className="card-img img-fluid"
+                                  width="96"
+                                  height="200"
+                                  alt="item.nameBook"
+                                />
+                              </div>
                             </div>
-                          </div>
-                          <div className="card-body bg-light text-center">
-                            <div className="mb-2">
-                              <a
-                                href="#"
-                                className="text-muted name"
-                                data-abc="true"
-                              >
-                                {item.nameBook}
-                              </a>
-                            </div>
-                            <div className="show">
-                              {item.rating === 1 && (
-                                <div>
-                                  <i className="fa fa-star star"></i>
+                            <div className="card-body bg-light text-center">
+                              <div className="mb-2">
+                                <a
+                                  href="#"
+                                  className="text-muted name"
+                                  data-abc="true"
+                                >
+                                  {item.nameBook}
+                                </a>
+                              </div>
+                              <div className="show">
+                                {item.rating === 1 && (
+                                  <div>
+                                    <i className="fa fa-star star"></i>
+                                  </div>
+                                )}
+                                {item.rating === 2 && (
+                                  <div>
+                                    <i className="fa fa-star star"></i>
+                                    <i className="fa fa-star star"></i>
+                                  </div>
+                                )}
+                                {item.rating === 3 && (
+                                  <div>
+                                    <i className="fa fa-star star"></i>
+                                    <i className="fa fa-star star"></i>
+                                    <i className="fa fa-star star"></i>
+                                  </div>
+                                )}
+                                {item.rating === 4 && (
+                                  <div>
+                                    <i className="fa fa-star star"></i>
+                                    <i className="fa fa-star star"></i>
+                                    <i className="fa fa-star star"></i>
+                                    <i className="fa fa-star star"></i>
+                                  </div>
+                                )}
+                                {item.rating === 5 && (
+                                  <div>
+                                    <i className="fa fa-star star"></i>
+                                    <i className="fa fa-star star"></i>
+                                    <i className="fa fa-star star"></i>
+                                    <i className="fa fa-star star"></i>
+                                    <i className="fa fa-star star"></i>
+                                  </div>
+                                )}
+                                <div className="text-muted mb-3">
+                                  {item.cmt} đánh giá
                                 </div>
-                              )}
-                              {item.rating === 2 && (
-                                <div>
-                                  <i className="fa fa-star star"></i>
-                                  <i className="fa fa-star star"></i>
-                                </div>
-                              )}
-                              {item.rating === 3 && (
-                                <div>
-                                  <i className="fa fa-star star"></i>
-                                  <i className="fa fa-star star"></i>
-                                  <i className="fa fa-star star"></i>
-                                </div>
-                              )}
-                              {item.rating === 4 && (
-                                <div>
-                                  <i className="fa fa-star star"></i>
-                                  <i className="fa fa-star star"></i>
-                                  <i className="fa fa-star star"></i>
-                                  <i className="fa fa-star star"></i>
-                                </div>
-                              )}
-                              {item.rating === 5 && (
-                                <div>
-                                  <i className="fa fa-star star"></i>
-                                  <i className="fa fa-star star"></i>
-                                  <i className="fa fa-star star"></i>
-                                  <i className="fa fa-star star"></i>
-                                  <i className="fa fa-star star"></i>
-                                </div>
-                              )}
-                              <div className="text-muted mb-3">
-                                {item.cmt} đánh giá
                               </div>
                             </div>
                           </div>
-                        </div>
-                        <div className="fade-in">
-                          <h3
-                            className={
-                              this.checkScreen()
-                                ? "hide price mb-0 font-weight-semibold"
-                                : "price mb-0 font-weight-semibold"
-                            }
-                          >
-                            {formatPrice(item.price)}
-                          </h3>
-                          <button
-                            type="button"
-                            className={
-                              this.checkScreen()
-                                ? "hide btn-add btn bg-cart"
-                                : "btn-add btn bg-cart"
-                            }
-                            onClick={() => this.handleAddToCart(item)}
-                          >
-                            <i className="fa fa-cart-plus mr-2"></i> Thêm vào
-                            giỏ hàng
-                          </button>
+                          <div className="fade-in">
+                            <h3
+                              className={
+                                this.checkScreen()
+                                  ? "hide price mb-0 font-weight-semibold"
+                                  : "price mb-0 font-weight-semibold"
+                              }
+                            >
+                              {formatPrice(item.price)}
+                            </h3>
+                            <button
+                              type="button"
+                              className={
+                                this.checkScreen()
+                                  ? "hide btn-add btn bg-cart"
+                                  : "btn-add btn bg-cart"
+                              }
+                              onClick={() => this.handleAddToCart(item)}
+                            >
+                              <i className="fa fa-cart-plus mr-2"></i> Thêm vào
+                              giỏ hàng
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="pagination">
-        <p>&laquo;</p>
-        {arr &&
-          arr.length &&
-          arr.map((item, index) => {
-            return (
-              <p
-                onClick={() => this.handleChangePage(item)}
-                className={currentPage === item ? "active" : ""}
-                key={index}
-              >
-                {item}
-              </p>
-            );
-          })}
-        <p>&raquo;</p>
+        <div className="pagination">
+          <p>&laquo;</p>
+          {arr &&
+            arr.length &&
+            arr.map((item, index) => {
+              return (
+                <p
+                  onClick={() => this.handleChangePage(item)}
+                  className={currentPage === item ? "active" : ""}
+                  key={index}
+                >
+                  {item}
+                </p>
+              );
+            })}
+          <p>&raquo;</p>
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>;
+    );
   }
 }
 const mapStateToProps = (state) => {

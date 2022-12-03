@@ -40,7 +40,41 @@ class ForgotPassword extends Component {
     }
   };
   render() {
-    return <div>Content HTML</div>;
+    return (
+      <div className="logincontainer">
+        <div className="imgcontainer">
+          <img src={logo} alt="Logo" className="avatar" />
+        </div>
+
+        <div className="container">
+          <label htmlFor="uname">
+            <b>Email</b>
+          </label>
+          <input
+            type="text"
+            placeholder="Nhập email đã đăng kí để khôi phục lại mật khẩu"
+            className="form-control mt-2"
+            name="uname"
+            onChange={(event) => this.handleOnchangeInput(event, "email")}
+            required
+          />
+
+          <button type="submit" onClick={() => this.handleForgotPassword()}>
+            Gửi yêu cầu
+          </button>
+        </div>
+
+        <div className="container" style={{ backgroundColor: "#f1f1f1" }}>
+          <button
+            type="button"
+            className="cancelbtn"
+            onClick={() => this.handleCancelForgotPassword()}
+          >
+            Hủy
+          </button>
+        </div>
+      </div>
+    );
   }
 }
 const mapStateToProps = (state) => {

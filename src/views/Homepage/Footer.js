@@ -15,41 +15,30 @@ class Footer extends Component {
           <div className="container">
             <div className="row">
               <div className="col-sm-6 col-md-3 item">
-                <h3>Services</h3>
+                <h3>Liên hệ</h3>
                 <ul>
                   <li>
-                    <a href="#">Web design</a>
+                    <a href="#">uitbook</a>
                   </li>
                   <li>
-                    <a href="#">Development</a>
-                  </li>
-                  <li>
-                    <a href="#">Hosting</a>
+                    <a href="#">Đại học Công nghệ thông tin</a>
                   </li>
                 </ul>
               </div>
               <div className="col-sm-6 col-md-3 item">
-                <h3>About</h3>
+                <h3>Về chúng tôi</h3>
                 <ul>
                   <li>
-                    <a href="#">Company</a>
+                    <a href="#">Cửa hàng</a>
                   </li>
                   <li>
-                    <a href="#">Team</a>
-                  </li>
-                  <li>
-                    <a href="#">Careers</a>
+                    <a href="#">Đội ngũ</a>
                   </li>
                 </ul>
               </div>
               <div className="col-md-6 item text">
                 <h3>uitbook</h3>
-                <p>
-                  Praesent sed lobortis mi. Suspendisse vel placerat ligula.
-                  Vivamus ac sem lacus. Ut vehicula rhoncus elementum. Etiam
-                  quis tristique lectus. Aliquam in arcu eget velit pulvinar
-                  dictum vel in justo.
-                </p>
+                <p>Cửa hàng sách trực tuyến</p>
               </div>
               <div className="col item social">
                 <a href="#">

@@ -239,7 +239,7 @@ class Book extends Component {
     //console.log(this.state);
     let cateName = this.state.allBooks[0]?.category.nameCate;
     return (
-      <div className="product-container">
+      <div className="product-container container">
         <div className="section-header">
           <HomeHeader></HomeHeader>
         </div>

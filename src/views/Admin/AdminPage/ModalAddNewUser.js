@@ -27,7 +27,6 @@ class ModalAddNewBook extends Component {
         value: "ADMIN",
         label: "ADMIN",
       },
-      action: "ADD_NEW_USER",
     };
   }
   componentDidMount() {
@@ -52,7 +51,6 @@ class ModalAddNewBook extends Component {
             value: "ADMIN",
             label: "ADMIN",
           },
-          action: "ADD_NEW_USER",
         });
       }
     }
@@ -94,12 +92,7 @@ class ModalAddNewBook extends Component {
     });
   };
   handleSubmitAdd = () => {
-    if (
-      this.state.errEmail === true &&
-      this.state.errPhone === true &&
-      this.state.passErr === true &&
-      this.state.action === "ADD_NEW_USER"
-    ) {
+    if (this.state.action === "ADD_NEW_USER") {
       let data = {
         email: this.state.email,
         fullName: this.state.fullName,
@@ -111,6 +104,7 @@ class ModalAddNewBook extends Component {
           nameRole: this.state.role.value,
         },
       };
+      console.log(data);
       this.props.doAddNewUser(data);
     }
     if (this.state.action === "EDIT_USER") {
